@@ -15,21 +15,21 @@ Aplicación móvil desarrollada con React Native + Expo para registrar avistamie
 
 A continuación se presenta un flujo básico de la aplicación:
 
-|                                       Listado Principal                                       |                                          Formulario de Registro                                           |
-| :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
-| <img src="./capturas_app/captura_01.png" width="250"> <br> _Estado inicial de la aplicación._ | <img src="./capturas_app/captura_02.png" width="250"> <br> _Formulario de captura con cámara y permisos._ |
+|                                          Listado Principal                                           |                                     Formulario de Registro                                     |
+| :--------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| <img src="./capturas_app/captura_01.png" width="250"> <br> _Cambio de orden ascendente/descendente._ | <img src="./capturas_app/captura_02.png" width="250"> <br> _Formulario de captura con cámara._ |
 
-|                                           Opciones de Registro                                           |                                           Listado Lleno                                            |
-| :------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| <img src="./capturas_app/captura_03.png" width="250"> <br> _Datos de especie, clima automático y notas._ | <img src="./capturas_app/captura_04.png" width="250"> <br> _Visualización de las aves capturadas._ |
+|                                           Opciones de Registro                                           |                       Listado Lleno                        |
+| :------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
+| <img src="./capturas_app/captura_03.png" width="250"> <br> _Datos de especie, clima automático y notas._ | <img src="./capturas_app/captura_04.png" width="250"> <br> |
 
-|                                   Detalle de Avistamiento                                   |                                          Búsqueda y Filtrado                                          |
-| :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
-| <img src="./capturas_app/captura_05.png" width="250"> <br> _Datos expandidos y Hero image._ | <img src="./capturas_app/captura_06.png" width="250"> <br> _Barra de búsqueda para filtrar la lista._ |
+|                                   Detalle de Avistamiento                                   |                     Permisos Ubicación                     |
+| :-----------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
+| <img src="./capturas_app/captura_05.png" width="250"> <br> _Datos expandidos y Hero image._ | <img src="./capturas_app/captura_06.png" width="250"> <br> |
 
-|                                        Ordenamiento Dinámico                                         |                                            Pantalla Completa                                             |
-| :--------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
-| <img src="./capturas_app/captura_07.png" width="250"> <br> _Cambio de orden ascendente/descendente._ | <img src="./capturas_app/captura_08.png" width="250"> <br> _Modal inmersivo para ver la foto en grande._ |
+|                      Permisos Camara                       |                                            Pantalla Completa                                             |
+| :--------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: |
+| <img src="./capturas_app/captura_07.png" width="250"> <br> | <img src="./capturas_app/captura_08.png" width="250"> <br> _Modal inmersivo para ver la foto en grande._ |
 
 ## Instalación y Uso
 
