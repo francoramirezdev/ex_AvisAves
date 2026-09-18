@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, ActivityIndicator, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useLocalSearchParams, router, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Colors, FontSize, Spacing, Radius } from '../../src/constants';
+import { Colors, FontSize, Spacing, Radius, TouchTarget } from '../../src/constants';
 import { Button } from '../../src/components/Button';
 import { EmptyState } from '../../src/components/EmptyState';
 import { Sighting } from '../../src/types';
@@ -11,6 +11,7 @@ export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [sighting, setSighting] = useState<Sighting | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -46,20 +47,25 @@ export default function DetailScreen() {
   });
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-      {/* Título dinámico en el header */}
-      <Stack.Screen options={{ title: sighting.birdName }} />
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        {/* Título dinámico en el header */}
+        <Stack.Screen options={{ title: sighting.birdName }} />
 
-      {/* Hero: foto + overlay nombre */}
-      <View style={styles.heroContainer}>
-        <Image source={{ uri: sighting.photoUri }} style={styles.heroImage} />
-        <View style={styles.heroOverlay}>
-          <Text style={styles.heroTitle}>{sighting.birdName}</Text>
-          <Text style={styles.heroDate}>{date}</Text>
-        </View>
-      </View>
+        {/* Hero: foto + overlay nombre */}
+        <TouchableOpacity 
+          style={styles.heroContainer}
+          activeOpacity={0.9}
+          onPress={() => setIsFullScreen(true)}
+        >
+          <Image source={{ uri: sighting.photoUri }} style={styles.heroImage} />
+          <View style={styles.heroOverlay}>
+            <Text style={styles.heroTitle}>{sighting.birdName}</Text>
+            <Text style={styles.heroDate}>{date}</Text>
+          </View>
+        </TouchableOpacity>
 
-      {/* Chips rápidos */}
+        {/* Chips rápidos */}
       <View style={styles.chips}>
         <View style={styles.chip}>
           <Text style={styles.chipIcon}>🐦</Text>
@@ -107,13 +113,31 @@ export default function DetailScreen() {
         </InfoBox>
       )}
 
-      <Button
-        title="Volver al listado"
-        variant="secondary"
-        onPress={() => router.back()}
-        style={styles.backBtn}
-      />
-    </ScrollView>
+        <Button
+          title="Volver al listado"
+          variant="secondary"
+          onPress={() => router.back()}
+          style={styles.backBtn}
+        />
+      </ScrollView>
+
+      {/* Modal Pantalla Completa */}
+      <Modal visible={isFullScreen} transparent={false} animationType="fade">
+        <SafeAreaView style={styles.fullScreenContainer}>
+          <TouchableOpacity 
+            style={styles.closeBtn} 
+            onPress={() => setIsFullScreen(false)}
+          >
+            <Text style={styles.closeBtnText}>Cerrar</Text>
+          </TouchableOpacity>
+          <Image 
+            source={{ uri: sighting.photoUri }} 
+            style={styles.fullScreenImage} 
+            resizeMode="contain" 
+          />
+        </SafeAreaView>
+      </Modal>
+    </View>
   );
 }
 
@@ -198,7 +222,6 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: FontSize.sm,
-    fontWeight: '600',
     color: Colors.primary,
   },
   infoValue: {
@@ -223,8 +246,31 @@ const styles = StyleSheet.create({
     marginHorizontal: Spacing.lg,
     marginTop: Spacing.lg,
   },
+  fullScreenContainer: {
+    flex: 1,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+  },
+  fullScreenImage: {
+    width: '100%',
+    height: '100%',
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: Spacing.xl + 20, // SafeArea allowance on top of standard spacing
+    right: Spacing.lg,
+    zIndex: 10,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.sm,
+    borderRadius: Radius.full,
+  },
+  closeBtnText: {
+    color: '#fff',
+    fontSize: FontSize.md,
+    fontWeight: 'bold',
+  },
 });
-
 const infoBoxStyles = StyleSheet.create({
   container: {
     backgroundColor: Colors.surface,
